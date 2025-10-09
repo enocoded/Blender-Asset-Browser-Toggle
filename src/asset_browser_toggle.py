@@ -70,6 +70,13 @@ class ASSET_OT_browser_toggle(Operator):
                 break
     
     def remove_asset_browser(self, context, asset_browser_area):
+        screen = context.screen
+        
+        # Check if this area can be safely closed (there should be at least 2 areas)
+        if len(screen.areas) <= 1:
+            self.report({'ERROR'}, "Cannot close the only remaining area")
+            return
+        
         region = None
         for reg in asset_browser_area.regions:
             if reg.type == 'WINDOW':
@@ -83,12 +90,16 @@ class ASSET_OT_browser_toggle(Operator):
         override_context = {
             'area': asset_browser_area,
             'region': region,
-            'screen': context.screen,
+            'screen': screen,
             'window': context.window
         }
         
-        with context.temp_override(**override_context):
-            bpy.ops.screen.area_close()
+        try:
+            with context.temp_override(**override_context):
+                bpy.ops.screen.area_close()
+        except Exception as e:
+            self.report({'ERROR'}, f"Failed to close area: {str(e)}")
+            return
 
 
 
