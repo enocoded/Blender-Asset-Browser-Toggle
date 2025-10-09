@@ -79,6 +79,13 @@ This project is released under the MIT License - feel free to modify and distrib
 
 ## Changelog
 
+### v1.1 (Latest)
+- **Improved Area Safety**: Added check to prevent closing the only remaining area
+- **Enhanced Error Handling**: Better exception handling for area close operations
+- **Refined Area Detection**: Improved logic for finding and managing asset browser areas
+- **Code Cleanup**: Streamlined area splitting and detection methods
+- **Bug Fixes**: Resolved issues with area visibility and positioning edge cases
+
 ### v1.0
 - Initial release with basic toggle functionality
 - Added keyboard shortcut registration
