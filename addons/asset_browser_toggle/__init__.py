@@ -1,3 +1,13 @@
+bl_info = {
+    "name": "Asset Browser Toggle",
+    "author": "Zdeno Sokol",
+    "version": (1, 2, 0),
+    "blender": (4, 4, 0),
+    "location": "Alt+Space",
+    "description": "Toggle Asset Browser area with keyboard shortcut",
+    "category": "Interface",
+}
+
 import bpy
 from bpy.types import Operator
 
@@ -102,36 +112,36 @@ class ASSET_OT_browser_toggle(Operator):
             return
 
 
+addon_keymaps = []
+
+
 def register_keymap():
     """Register keyboard shortcut for asset browser toggle"""
     wm = bpy.context.window_manager
     kc = wm.keyconfigs.addon
     if kc:
         km = kc.keymaps.new(name='Screen', space_type='EMPTY')
-        km.keymap_items.new(ASSET_OT_browser_toggle.bl_idname, 'SPACE', 'PRESS', alt=True)
+        kmi = km.keymap_items.new(ASSET_OT_browser_toggle.bl_idname, 'SPACE', 'PRESS', alt=True)
+        addon_keymaps.append((km, kmi))
 
 
 def unregister_keymap():
     """Unregister keyboard shortcut for asset browser toggle"""
-    wm = bpy.context.window_manager
-    kc = wm.keyconfigs.addon
-    if kc:
-        km = kc.keymaps.get('Screen')
-        if km:
-            for kmi in km.keymap_items:
-                if kmi.idname == ASSET_OT_browser_toggle.bl_idname:
-                    km.keymap_items.remove(kmi)
-                    break
+    for km, kmi in addon_keymaps:
+        km.keymap_items.remove(kmi)
+    addon_keymaps.clear()
 
 
 def register():
     bpy.utils.register_class(ASSET_OT_browser_toggle)
     register_keymap()
+    print("Asset Browser Toggle addon registered successfully!")
 
 
 def unregister():
     unregister_keymap()
     bpy.utils.unregister_class(ASSET_OT_browser_toggle)
+    print("Asset Browser Toggle addon unregistered")
 
 
 if __name__ == "__main__":
