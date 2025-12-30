@@ -102,18 +102,17 @@ class ASSET_OT_browser_toggle(Operator):
             return
 
 
-
-def register():
-    bpy.utils.register_class(ASSET_OT_browser_toggle)
-    
+def register_keymap():
+    """Register keyboard shortcut for asset browser toggle"""
     wm = bpy.context.window_manager
     kc = wm.keyconfigs.addon
     if kc:
         km = kc.keymaps.new(name='Screen', space_type='EMPTY')
-        km.keymap_items.new(ASSET_OT_browser_toggle.bl_idname, 'SPACE', 'PRESS', ctrl=True)
+        km.keymap_items.new(ASSET_OT_browser_toggle.bl_idname, 'SPACE', 'PRESS', alt=True)
 
 
-def unregister():
+def unregister_keymap():
+    """Unregister keyboard shortcut for asset browser toggle"""
     wm = bpy.context.window_manager
     kc = wm.keyconfigs.addon
     if kc:
@@ -123,7 +122,15 @@ def unregister():
                 if kmi.idname == ASSET_OT_browser_toggle.bl_idname:
                     km.keymap_items.remove(kmi)
                     break
-    
+
+
+def register():
+    bpy.utils.register_class(ASSET_OT_browser_toggle)
+    register_keymap()
+
+
+def unregister():
+    unregister_keymap()
     bpy.utils.unregister_class(ASSET_OT_browser_toggle)
 
 

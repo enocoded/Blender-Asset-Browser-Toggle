@@ -4,7 +4,7 @@ A Blender Python script that provides a convenient keyboard shortcut to toggle t
 
 ## Features
 
-- **Quick Toggle**: Press `Ctrl+Space` to instantly show/hide the Asset Browser
+- **Quick Toggle**: Press `Alt+Space` to instantly show/hide the Asset Browser
 - **Smart Area Management**: Automatically splits the first visible area horizontally when opening
 - **Clean Removal**: Uses proper area closing when hiding the Asset Browser
 - **Hidden Panel Safe**: Correctly handles hidden/minimized panels by filtering for visible areas only
@@ -22,20 +22,20 @@ A Blender Python script that provides a convenient keyboard shortcut to toggle t
 2. Restart Blender - the script will automatically load and register the hotkey
 
 ### Important: Shortcut Conflict
-⚠️ **Note**: `Ctrl+Space` conflicts with Blender's default "Toggle Maximize Area" shortcut. You'll need to remove or change the default shortcut first:
+⚠️ **Note**: The default shortcut conflicts with Blender's built-in "Toggle Maximize Area" command. You'll need to remove or change the default shortcut first:
 
 1. Go to `Edit` → `Preferences` → `Keymap`
 2. Search for "Toggle Maximize Area" 
-3. Either delete the existing `Ctrl+Space` binding or change it to a different key combination
+3. Either delete the existing binding or change it to a different key combination
 4. Save preferences and restart Blender
 
 ## Usage
 
-- **Open Asset Browser**: Press `Ctrl+Space` when no Asset Browser is visible
+- **Open Asset Browser**: Press the hotkey when no Asset Browser is visible
   - Splits the leftmost visible area horizontally (30% for Asset Browser)
   - Automatically sets the new area to Asset Browser mode
   
-- **Close Asset Browser**: Press `Ctrl+Space` when Asset Browser is visible
+- **Close Asset Browser**: Press the hotkey when Asset Browser is visible
   - Cleanly removes the Asset Browser area
   - Restores the original layout
 
@@ -58,8 +58,8 @@ A Blender Python script that provides a convenient keyboard shortcut to toggle t
 
 **Q: Hotkey doesn't work**
 - A: Make sure the script is in the startup folder and Blender has been restarted
-- A: **Most common issue**: Remove Blender's default `Ctrl+Space` "Toggle Maximize Area" shortcut first (see Installation section)
-- A: Check if `Ctrl+Space` conflicts with other system shortcuts
+- A: **Most common issue**: Remove Blender's default "Toggle Maximize Area" shortcut first (see Installation section)
+- A: Check if the shortcut conflicts with other system hotkeys
 
 **Q: Split happens in wrong area**
 - A: The script targets the leftmost visible area - hide areas you don't want split
@@ -79,7 +79,11 @@ This project is released under the MIT License - feel free to modify and distrib
 
 ## Changelog
 
-### v1.1 (Latest)
+### v1.2 (latest)
+- **Refactored Shortcut Registration**: Improved hotkey registration and unregistration process
+- **Changed shortcut**: Updated default toggle to `Alt+Space` to avoid conflicts
+
+### v1.1
 - **Improved Area Safety**: Added check to prevent closing the only remaining area
 - **Enhanced Error Handling**: Better exception handling for area close operations
 - **Refined Area Detection**: Improved logic for finding and managing asset browser areas
